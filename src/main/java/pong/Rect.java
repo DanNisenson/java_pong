@@ -3,8 +3,8 @@ package pong;
 import java.awt.Graphics;
 
 public class Rect {
-    int x, y, w, h;
     Graphics g;
+    private int x, y, w, h;
 
     public Rect(int x, int y, int w, int h) {
         this.x = x;
@@ -13,6 +13,14 @@ public class Rect {
         this.h = h;
         UI ui = UI.getInstance();
         g = ui.getGraphics();
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void draw() {

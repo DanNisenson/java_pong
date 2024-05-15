@@ -1,12 +1,18 @@
 package pong;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Loop implements Runnable {
+    Rect player1, player2, ball;
+    PlayerController pControl;
+    UI ui;
+
     @Override
     public void run() {
-        UI ui = UI.getInstance();
-        ui.init();
+        ui = UI.getInstance();
+        ui.initWindow();
+        initPlayersAndBall();
 
         double lastFrameTime = Time.getTime();
         while (true) {
@@ -31,27 +37,35 @@ public class Loop implements Runnable {
     }
 
     public void update(double dt) {
-        Rect player1 = new Rect(
+        ui.getGraphics().setColor(Constants.SCREEN_BG);
+        ui.getGraphics().fillRect(0, 0, Constants.WINDOW_W, Constants.WINDOW_H);
+
+        pControl.update(dt);
+
+        player1.draw();
+        player2.draw();
+        ball.draw();
+    }
+
+    private void initPlayersAndBall() {
+        player1 = new Rect(
                 Constants.PADDLE_PADDING,
-                0,
+                Constants.WINDOW_H / 2,
                 Constants.PADDLE_W,
                 Constants.PADDLE_H
         );
-        Rect player2 = new Rect(
+        player2 = new Rect(
                 Constants.WINDOW_W - Constants.PADDLE_PADDING - Constants.PADDLE_W,
-                0,
+                Constants.WINDOW_H / 2,
                 Constants.PADDLE_W,
                 Constants.PADDLE_H
         );
-        Rect ball = new Rect(
+        ball = new Rect(
                 Constants.WINDOW_W / 2,
                 Constants.WINDOW_H / 2,
                 Constants.BALL_SIZE,
                 Constants.BALL_SIZE
         );
-
-        player1.draw();
-        player2.draw();
-        ball.draw();
+        pControl = new PlayerController(player1);
     }
 }

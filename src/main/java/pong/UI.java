@@ -23,7 +23,7 @@ public class UI {
         return frame.getGraphics();
     }
 
-    public void init() {
+    public void initWindow() {
         createAndShowGUI();
         // SwingUtilities.invokeLater(this::createAndShowGUI);
     }
