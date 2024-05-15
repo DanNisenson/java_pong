@@ -6,8 +6,8 @@ import java.awt.*;
 public class UI {
     public static UI instance;
     public final JFrame frame = new JFrame(Constants.WINDOW_TITLE);
-    public final JPanel contentPane = new JPanel();
     public final KL keyListener = new KL();
+    private Image img;
 
     private UI() {
     }
@@ -19,13 +19,11 @@ public class UI {
         return instance;
     }
 
-    public Graphics getGraphics() {
-        return frame.getGraphics();
-    }
-
     public void initWindow() {
         createAndShowGUI();
-        // SwingUtilities.invokeLater(this::createAndShowGUI);
+        createDbImage();
+        frame.addKeyListener(keyListener);
+//        SwingUtilities.invokeLater(this::createAndShowGUI);
     }
 
     private void createAndShowGUI() {
@@ -35,10 +33,22 @@ public class UI {
         frame.setResizable(false);
         frame.setSize(new Dimension(Constants.WINDOW_W, Constants.WINDOW_H));
         frame.setLocationRelativeTo(null);
-        frame.addKeyListener(keyListener);
+    }
 
-        contentPane.setBackground(new Color(0));
-        contentPane.setFocusable(true);
-        frame.setContentPane(contentPane);
+    public void createDbImage() {
+        img = frame.createImage(frame.getWidth(), frame.getHeight());
+    }
+
+    public Graphics2D getDbGraphics() {
+        return (Graphics2D) img.getGraphics();
+    }
+
+    public void drawImg() {
+        frame.getGraphics().drawImage(img, 0, 0, frame);
+    }
+
+    public void setBackground(Graphics2D g) {
+        g.setColor(Constants.SCREEN_BG);
+        g.fillRect(0, 0, Constants.WINDOW_W, Constants.WINDOW_H);
     }
 }

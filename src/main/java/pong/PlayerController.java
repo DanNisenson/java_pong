@@ -13,10 +13,10 @@ public class PlayerController {
 
     public void update(double dt) {
         if (keyListener.isKeyPressed((KeyEvent.VK_DOWN))) {
-            int newY = rectangle.getY() + (int) (100 * dt);
+            double newY = rectangle.getY() + (100 * dt);
             rectangle.setY(newY);
         } else if (keyListener.isKeyPressed((KeyEvent.VK_UP))) {
-            int newY = rectangle.getY() - (int) (100 * dt);
+            double newY = rectangle.getY() - (100 * dt);
             rectangle.setY(newY);
         }
     }

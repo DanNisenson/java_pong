@@ -29,7 +29,7 @@ public class Loop implements Runnable {
             }
 
             try {
-                Thread.sleep(30);
+                Thread.sleep(10);
             } catch (Exception e) {
 
             }
@@ -37,14 +37,17 @@ public class Loop implements Runnable {
     }
 
     public void update(double dt) {
-        ui.getGraphics().setColor(Constants.SCREEN_BG);
-        ui.getGraphics().fillRect(0, 0, Constants.WINDOW_W, Constants.WINDOW_H);
+        ui.createDbImage();
+        Graphics2D dbg = (Graphics2D) ui.getDbGraphics();
 
         pControl.update(dt);
 
-        player1.draw();
-        player2.draw();
-        ball.draw();
+        ui.setBackground(dbg);
+        player1.draw(dbg);
+        player2.draw(dbg);
+        ball.draw(dbg);
+
+        ui.drawImg();
     }
 
     private void initPlayersAndBall() {

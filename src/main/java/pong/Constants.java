@@ -11,7 +11,7 @@ public class Constants {
 
 
     public static final int PADDLE_PADDING = 10;
-    public static final int PADDLE_W = 10;
-    public static final int PADDLE_H = 100;
+    public static final double PADDLE_W = 10;
+    public static final double PADDLE_H = 100;
     public static final int BALL_SIZE = 10;
 }
