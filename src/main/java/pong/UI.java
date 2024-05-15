@@ -33,6 +33,8 @@ public class UI {
         frame.setResizable(false);
         frame.setSize(new Dimension(Constants.WINDOW_W, Constants.WINDOW_H));
         frame.setLocationRelativeTo(null);
+
+        Constants.INSETS_TOP = frame.getInsets().top;
     }
 
     public void createDbImage() {

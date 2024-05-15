@@ -20,19 +20,6 @@ public class Loop implements Runnable {
             double deltaTime = now - lastFrameTime;
             lastFrameTime = now;
             update(deltaTime);
-
-            if (ui.keyListener.isKeyPressed(KeyEvent.VK_UP)) {
-                System.out.println("DOWN");
-            }
-            if (ui.keyListener.isKeyPressed(KeyEvent.VK_DOWN)) {
-                System.out.println("UP");
-            }
-
-            try {
-                Thread.sleep(10);
-            } catch (Exception e) {
-
-            }
         }
     }
 

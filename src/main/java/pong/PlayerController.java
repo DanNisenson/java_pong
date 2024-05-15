@@ -13,11 +13,15 @@ public class PlayerController {
 
     public void update(double dt) {
         if (keyListener.isKeyPressed((KeyEvent.VK_DOWN))) {
-            double newY = rectangle.getY() + (100 * dt);
-            rectangle.setY(newY);
+            if (rectangle.getY() + Constants.PADDLE_H + Constants.PADDLE_SPEED * dt < Constants.WINDOW_H) {
+                double newY = rectangle.getY() + (Constants.PADDLE_SPEED * dt);
+                rectangle.setY(newY);
+            }
         } else if (keyListener.isKeyPressed((KeyEvent.VK_UP))) {
-            double newY = rectangle.getY() - (100 * dt);
-            rectangle.setY(newY);
+            if (rectangle.getY() - Constants.PADDLE_SPEED * dt > Constants.INSETS_TOP) {
+                double newY = rectangle.getY() - (Constants.PADDLE_SPEED * dt);
+                rectangle.setY(newY);
+            }
         }
     }
 }
