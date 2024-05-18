@@ -8,6 +8,8 @@ public class Loop implements Runnable {
     Ball ball;
     PlayerController p1Control, p2Control;
     UI ui;
+    //
+    boolean IS_MULTIPLAYER = true;
 
     @Override
     public void run() {
@@ -41,27 +43,34 @@ public class Loop implements Runnable {
     }
 
     private void initPlayersAndBall() {
+        double screenCenterY = (double) Constants.WINDOW_H / 2;
+        double paddleStartY = screenCenterY - Constants.PADDLE_H / 2;
         p1Paddle = new Rect(
                 Constants.PADDLE_PADDING,
-                Constants.WINDOW_H / 2,
+                paddleStartY,
                 Constants.PADDLE_W,
                 Constants.PADDLE_H
         );
         p2Paddle = new Rect(
                 Constants.WINDOW_W - Constants.PADDLE_PADDING - Constants.PADDLE_W,
-                Constants.WINDOW_H / 2,
+                paddleStartY,
                 Constants.PADDLE_W,
                 Constants.PADDLE_H
         );
+
+        double ballCenter = (double) Constants.BALL_SIZE / 2;
         ball = new Ball(
-                Constants.WINDOW_W / 2,
-                Constants.WINDOW_H / 2,
+                (double) Constants.WINDOW_W / 2 - ballCenter,
+                screenCenterY - ballCenter,
                 Constants.BALL_SIZE,
                 Constants.BALL_SIZE,
                 p1Paddle,
                 p2Paddle
         );
+
         p1Control = new PlayerController(p1Paddle, KeyEvent.VK_W, KeyEvent.VK_S);
-        p2Control = new PlayerController(p2Paddle, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
+        p2Control = IS_MULTIPLAYER
+                ? new PlayerController(p2Paddle, KeyEvent.VK_UP, KeyEvent.VK_DOWN)
+                : new AI(p2Paddle, ball);
     }
 }

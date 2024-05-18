@@ -3,13 +3,23 @@ package pong;
 public class PlayerController {
     private final Rect paddle;
     private final KL keyListener;
-    private final int keyUpCode, keyDownCode;
+    private int keyUpCode;
+    private int keyDownCode;
 
     public PlayerController(Rect playerPaddle, int keyUpCode, int keyDownCode) {
         this.paddle = playerPaddle;
         keyListener = UI.getInstance().keyListener;
         this.keyUpCode = keyUpCode;
         this.keyDownCode = keyDownCode;
+    }
+
+    public PlayerController(Rect playerPaddle) {
+        this.paddle = playerPaddle;
+        keyListener = UI.getInstance().keyListener;
+    }
+
+    public Rect getPaddle() {
+        return paddle;
     }
 
     public void update(double dt) {
@@ -21,24 +31,24 @@ public class PlayerController {
     }
 
     public void movePaddle(double dt, boolean goingUp) {
-        double y = paddle.getY();
+        double y = paddle.getTop();
         if (goingUp) {
-            if (!willMovePastTop(y, dt)) {
+            if (!willMovePastTop(dt)) {
                 y -= (Constants.PADDLE_SPEED * dt);
             }
         } else {
-            if (!willMovePastBottom(y, dt)) {
+            if (!willMovePastBottom(dt)) {
                 y += (Constants.PADDLE_SPEED * dt);
             }
         }
         paddle.setY(y);
     }
 
-    private boolean willMovePastTop(double y, double dt) {
-        return y - Constants.PADDLE_SPEED * dt <= Constants.INSETS_TOP;
+    private boolean willMovePastTop(double dt) {
+        return paddle.getTop() - Constants.PADDLE_SPEED * dt <= Constants.INSETS_TOP;
     }
 
-    private boolean willMovePastBottom(double y, double dt) {
-        return y + Constants.PADDLE_H + Constants.PADDLE_SPEED * dt >= Constants.WINDOW_H;
+    private boolean willMovePastBottom(double dt) {
+        return paddle.getBottom() + Constants.PADDLE_SPEED * dt >= Constants.WINDOW_H;
     }
 }

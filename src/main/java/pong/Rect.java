@@ -14,8 +14,20 @@ public class Rect {
         this.h = h;
     }
 
-    public double getY() {
+    public double getTop() {
         return y;
+    }
+
+    public double getBottom() {
+        return y + h;
+    }
+
+    public double getLeft() {
+        return x;
+    }
+
+    public double getRight() {
+        return x + w;
     }
 
     public void setY(double y) {
