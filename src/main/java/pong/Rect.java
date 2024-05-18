@@ -4,14 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class Rect {
-    private double x, y, w, h;
+    protected final double w, h;
+    protected double x, y;
 
     public Rect(double x, double y, double w, double h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        UI ui = UI.getInstance();
     }
 
     public double getY() {
