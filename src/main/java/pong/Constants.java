@@ -9,13 +9,15 @@ public class Constants {
 
     public static final int WINDOW_H = 800;
     public static final int WINDOW_W = (WINDOW_H / 3) * 4;
-    
+
     public static final int PADDLE_PADDING = 10;
     public static final double PADDLE_W = 10;
     public static final double PADDLE_H = 100;
     public static final double PADDLE_SPEED = 300;
 
     public static final int BALL_SIZE = 10;
+    public static final double BALL_SPEED = 450;
+    public static final double BALL_MAX_ANGLE = 45;
 
     public static int INSETS_TOP;
 

@@ -9,7 +9,7 @@ public class Loop implements Runnable {
     PlayerController p1Control, p2Control;
     UI ui;
     //
-    boolean IS_MULTIPLAYER = true;
+    boolean IS_MULTIPLAYER = false;
 
     @Override
     public void run() {

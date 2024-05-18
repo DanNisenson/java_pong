@@ -30,6 +30,10 @@ public class Rect {
         return x + w;
     }
 
+    public double getInWindowCenterY() {
+        return y + h / 2;
+    }
+
     public void setY(double y) {
         this.y = y;
     }
