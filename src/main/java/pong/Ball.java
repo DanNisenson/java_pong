@@ -15,29 +15,13 @@ public class Ball extends Rect {
 
     public void update(double dt) {
         if (checkLeftPaddleCollision() || checkRightPaddleCollision()) {
-            setBallNewVelocities();
-        } else if (checkTopCollision() || checkFloorCollision()) {
+            reverseVelocityX();
+            setNewAngleY();
+        } else if (checkWindowTopCollision() || checkWindowBottomCollision()) {
             reverseVelocityY();
         }
 
         updatePosition(dt);
-    }
-
-    private void setBallNewVelocities() {
-        double newAngle = getNewVelocityAngle();
-        double newVx = Math.abs(Math.cos(newAngle));
-        double newVy = (-Math.sin(newAngle));
-
-        double oldSign = Math.signum(vx);
-        vx = newVx * (-1 * oldSign);
-        vy = newVy;
-    }
-
-    private double getNewVelocityAngle() {
-        double intersectY = leftPaddle.getInWindowCenterY() - getInWindowCenterY();
-        double normalizedIntersect = intersectY / (leftPaddle.h / 2);
-        double newAngle = normalizedIntersect * Constants.BALL_MAX_ANGLE;
-        return Math.toRadians(newAngle);
     }
 
     private boolean checkLeftPaddleCollision() {
@@ -62,11 +46,11 @@ public class Ball extends Rect {
         return getBottom() >= paddle.getTop() && getTop() <= paddle.getBottom();
     }
 
-    private boolean checkTopCollision() {
+    private boolean checkWindowTopCollision() {
         return isMovingUp() && getTop() <= Constants.INSETS_TOP;
     }
 
-    private boolean checkFloorCollision() {
+    private boolean checkWindowBottomCollision() {
         return isMovingDown() && getBottom() >= Constants.WINDOW_H;
     }
 
@@ -78,8 +62,20 @@ public class Ball extends Rect {
         return vy > 0;
     }
 
+    private void reverseVelocityX() {
+        vx *= -1;
+    }
+
     private void reverseVelocityY() {
         vy *= -1;
+    }
+
+    private void setNewAngleY() {
+        double intersectY = leftPaddle.getInWindowCenterY() - getInWindowCenterY();
+        double normalizedIntersect = intersectY / (leftPaddle.h / 2);
+        double newAngle = normalizedIntersect * Constants.BALL_MAX_ANGLE;
+        double newAngleRads = Math.toRadians(newAngle);
+        vy = (-Math.sin(newAngleRads));
     }
 
     private void updatePosition(double dt) {
