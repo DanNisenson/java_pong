@@ -4,6 +4,7 @@ public class Ball extends Rect {
     GameState state;
     Rect leftPaddle;
     Rect rightPaddle;
+    double ballSpeed;
 
     private double vx = -1;
     private double vy = -1;
@@ -20,6 +21,7 @@ public class Ball extends Rect {
         if (checkLeftPaddleCollision() || checkRightPaddleCollision()) {
             reverseVelocityX();
             setNewAngleY();
+            ballSpeed *= Constants.BALL_ACCELERATION;
         } else if (checkWindowTopCollision() || checkWindowBottomCollision()) {
             reverseVelocityY();
         }
@@ -90,8 +92,8 @@ public class Ball extends Rect {
     }
 
     private void updatePosition(double dt) {
-        x += vx * Constants.BALL_SPEED * dt;
-        y += vy * Constants.BALL_SPEED * dt;
+        x += vx * ballSpeed * dt;
+        y += vy * ballSpeed * dt;
     }
 
     private void resetBall() {
@@ -99,12 +101,13 @@ public class Ball extends Rect {
         x = (double) Constants.WINDOW_W / 2 - ballCenter;
         y = (double) Constants.WINDOW_H / 2 - ballCenter;
         randomizeDirection();
+        ballSpeed = Constants.BALL_SPEED;
     }
 
     private void randomizeDirection() {
         double randomX = Math.random() < 0.5 ? 1 : -1;
         double randomY = Math.random() < 0.5 ? 1 : -1;
-        vx = randomX;
-        vy = randomY;
+        vx *= randomX;
+        vy *= randomY;
     }
 }

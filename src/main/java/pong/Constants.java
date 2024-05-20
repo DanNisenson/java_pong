@@ -16,8 +16,9 @@ public class Constants {
     public static final double PADDLE_SPEED = 300;
 
     public static final int BALL_SIZE = 10;
-    public static final double BALL_SPEED = 450;
+    public static final double BALL_SPEED = 350;
     public static final double BALL_MAX_ANGLE = 45;
+    public static final double BALL_ACCELERATION = 1.1;
 
     public static int INSETS_TOP;
 
