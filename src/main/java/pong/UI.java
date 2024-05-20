@@ -45,7 +45,7 @@ public class UI {
         return (Graphics2D) img.getGraphics();
     }
 
-    public void drawImg() {
+    public void drawDbImg() {
         frame.getGraphics().drawImage(img, 0, 0, frame);
     }
 

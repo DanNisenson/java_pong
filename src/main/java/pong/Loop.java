@@ -8,6 +8,7 @@ public class Loop implements Runnable {
     Ball ball;
     PlayerController p1Control, p2Control;
     UI ui;
+    NumberSprites nums;
     //
     boolean IS_MULTIPLAYER = false;
 
@@ -16,6 +17,7 @@ public class Loop implements Runnable {
         ui = UI.getInstance();
         ui.initWindow();
         initPlayersAndBall();
+        nums = new NumberSprites();
 
         double lastFrameTime = Time.getTime();
         while (true) {
@@ -38,8 +40,10 @@ public class Loop implements Runnable {
         p1Paddle.draw(dbg);
         p2Paddle.draw(dbg);
         ball.draw(dbg);
+        nums.drawRect(0, 100, 100, dbg);
+        nums.drawRect(1, Constants.WINDOW_W - 100, 100, dbg);
 
-        ui.drawImg();
+        ui.drawDbImg();
     }
 
     private void initPlayersAndBall() {
