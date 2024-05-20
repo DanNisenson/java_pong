@@ -8,16 +8,18 @@ public class Loop implements Runnable {
     Ball ball;
     PlayerController p1Control, p2Control;
     UI ui;
-    NumberSprites nums;
-    //
+    GameState state;
+    NumberSprites nums = new NumberSprites();
+
     boolean IS_MULTIPLAYER = false;
 
     @Override
     public void run() {
         ui = UI.getInstance();
-        ui.initWindow();
+        state = GameState.getInstance();
+        state.newGame();
         initPlayersAndBall();
-        nums = new NumberSprites();
+        ui.initWindow();
 
         double lastFrameTime = Time.getTime();
         while (true) {
@@ -40,8 +42,8 @@ public class Loop implements Runnable {
         p1Paddle.draw(dbg);
         p2Paddle.draw(dbg);
         ball.draw(dbg);
-        nums.drawRect(0, 100, 100, dbg);
-        nums.drawRect(1, Constants.WINDOW_W - 100, 100, dbg);
+        nums.drawRect(state.getP1Score(), 100, 100, dbg);
+        nums.drawRect(state.getP2Score(), Constants.WINDOW_W - 100, 100, dbg);
 
         ui.drawDbImg();
     }
@@ -61,17 +63,12 @@ public class Loop implements Runnable {
                 Constants.PADDLE_W,
                 Constants.PADDLE_H
         );
-
-        double ballCenter = (double) Constants.BALL_SIZE / 2;
         ball = new Ball(
-                (double) Constants.WINDOW_W / 2 - ballCenter,
-                screenCenterY - ballCenter,
                 Constants.BALL_SIZE,
                 Constants.BALL_SIZE,
                 p1Paddle,
                 p2Paddle
         );
-
         p1Control = new PlayerController(p1Paddle, KeyEvent.VK_W, KeyEvent.VK_S);
         p2Control = IS_MULTIPLAYER
                 ? new PlayerController(p2Paddle, KeyEvent.VK_UP, KeyEvent.VK_DOWN)
