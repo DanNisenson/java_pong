@@ -22,7 +22,7 @@ public class NumberSprites {
     private final int[][] three = {top, topRight, center, bottomRight, bottom};
     private final int[][] four = {topLeft, topRight, center, bottomRight};
     private final int[][] five = {top, topLeft, center, bottomRight, bottom};
-    private final int[][] six = {top, topRight, center, bottomRight, bottom, bottomLeft};
+    private final int[][] six = {top, topLeft, center, bottomRight, bottom, bottomLeft};
     private final int[][] seven = {top, topRight, bottomRight};
     private final int[][] eight = {top, topRight, topLeft, center, bottomRight, bottomLeft, bottom};
     private final int[][] nine = {top, topRight, topLeft, center, bottomRight};
